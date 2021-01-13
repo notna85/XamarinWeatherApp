@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinWeatherApp.Models;
 
 namespace XamarinWeatherApp
 {
@@ -17,6 +18,15 @@ namespace XamarinWeatherApp
             InitializeComponent();
         }
 
+        private async void FetchDataButton_Clicked(object sender, EventArgs e)
+        {
+            WeatherController weatherController = new WeatherController();
 
+            if (!string.IsNullOrWhiteSpace(CityNameInput.Text))
+            {
+                await weatherController.GetWeatherByCityAsync(CityNameInput.Text);
+                BindingContext = weatherController.CurrentWeather;
+            }
+        }
     }
 }

@@ -1,16 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="XamarinWeatherApp.StartPage">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Padding="0, 30, 0, 30">
             <Entry x:Name="CityNameInput" Placeholder="City name" MaxLength="100" WidthRequest="200"/>
 
-            <Button x:Name="FetchDataButton" Text="Fetch data" HeightRequest="60"/>
-            
-            <StackLayout Padding="0, 30, 0, 0">
-                <Label x:Name="City" Text="City" FontAttributes="Bold" FontSize="Large"></Label>
-                <Label x:Name="Temperature" Text="Temperature:  5C"></Label>
+            <Button x:Name="FetchDataButton" Text="Fetch data" HeightRequest="60" Clicked="FetchDataButton_Clicked" />
+
+            <StackLayout Padding="0, 30, 0, 0" >
+                <Label x:Name="City" Text="{Binding Name}" FontAttributes="Bold" FontSize="Large"></Label>
+                
+                <Label x:Name="Weather" Text="{Binding Weather[0].Type, StringFormat='Weather: {0}'}"></Label>
+                
+                <Label x:Name="Temperature" Text="{Binding Main.Temperature, StringFormat='Temperature: {0} C'}"></Label>
+
+                <Label x:Name="Wind" Text="{Binding Wind.Speed, StringFormat='Wind: {0} m/s'}"></Label>
+                
+                <Label x:Name="Rain" Text="{Binding Rain.OneHour, StringFormat='Rain: {0} mm'}"></Label>
+
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
