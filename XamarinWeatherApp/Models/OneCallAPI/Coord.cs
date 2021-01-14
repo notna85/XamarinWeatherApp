@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace XamarinWeatherApp.Models
+namespace XamarinWeatherApp.Models.OneCallAPI
 {
     public class Coord
     {
-        [JsonIgnore]
+        [JsonProperty("lon")]
         public double Lon { get; set; }
-        [JsonIgnore]
+
+        [JsonProperty("lat")]
         public double Lat { get; set; }
 
         public Coord()

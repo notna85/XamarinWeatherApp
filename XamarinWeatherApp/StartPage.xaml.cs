@@ -25,8 +25,14 @@ namespace XamarinWeatherApp
             if (!string.IsNullOrWhiteSpace(CityNameInput.Text))
             {
                 await weatherController.GetWeatherByCityAsync(CityNameInput.Text);
-                BindingContext = weatherController.CurrentWeather;
+                if (weatherController.Forecast != null)
+                    BindingContext = weatherController.Forecast;
+                else
+                    await DisplayAlert("Error", "No city with that name found", "OK");
+
             }
+            else
+                await DisplayAlert("No city", "Please input a city first.", "OK");
         }
     }
 }

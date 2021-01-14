@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using XamarinWeatherApp.Interfaces;
 using XamarinWeatherApp.Models;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+using XamarinWeatherApp.Models.OneCallAPI;
+
 
 namespace XamarinWeatherApp
 {
-    class ApiHandler : ICommunication<WeatherData>
+    class ApiHandler : ICommunication<Forecast>
     {
         private HttpClient httpClient;
 
@@ -20,17 +19,18 @@ namespace XamarinWeatherApp
             httpClient = new HttpClient();
         }
 
-        public async Task<WeatherData> FetchDataAsync(string requestUrl)
+        public async Task<Forecast> FetchDataAsync(string requestUrl)
         {
-            WeatherData weather = null;
+            Forecast forecast = null;
             HttpResponseMessage httpResponse = await httpClient.GetAsync(requestUrl);
 
             if (httpResponse.IsSuccessStatusCode)
             {
                 string content = await httpResponse.Content.ReadAsStringAsync();
-                weather = JsonConvert.DeserializeObject <WeatherData>(content);        
+                ISerialize<Forecast> serializer = new JSONSerializer<Forecast>();
+                forecast = serializer.DeSerialize(content);
             }
-            return weather;
+            return forecast;
         }
     }
 }

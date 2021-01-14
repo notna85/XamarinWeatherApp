@@ -8,16 +8,20 @@
 
             <Button x:Name="FetchDataButton" Text="Fetch data" HeightRequest="60" Clicked="FetchDataButton_Clicked" />
 
-            <StackLayout Padding="0, 30, 0, 0" >
-                <Label x:Name="City" Text="{Binding Name}" FontAttributes="Bold" FontSize="Large"></Label>
+            <StackLayout Padding="0, 30, 0, 0" HorizontalOptions="CenterAndExpand">
+                <Label x:Name="City" Text="{Binding City}" 
+                       FontAttributes="Bold" 
+                       FontSize="Large"></Label>
+                <Label Text="{Binding Current.ConvertedTime}"></Label>
                 
-                <Label x:Name="Weather" Text="{Binding Weather[0].Type, StringFormat='Weather: {0}'}"></Label>
-                
-                <Label x:Name="Temperature" Text="{Binding Main.Temperature, StringFormat='Temperature: {0} C'}"></Label>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label x:Name="Weather" Text="{Binding Current.Weather[0].Type, StringFormat='Weather: {0}'}"></Label>
+                    <Image Source="{Binding Current.Weather[0].DisplayIcon}"></Image>
+                </StackLayout>
 
-                <Label x:Name="Wind" Text="{Binding Wind.Speed, StringFormat='Wind: {0} m/s'}"></Label>
-                
-                <Label x:Name="Rain" Text="{Binding Rain.OneHour, StringFormat='Rain: {0} mm'}"></Label>
+                <Label x:Name="Temperature" Text="{Binding Current.Temperature, StringFormat='Temperature: {0} C'}"></Label>
+
+                <Label x:Name="Wind" Text="{Binding Current.WindSpeed, StringFormat='Wind: {0} m/s'}"></Label>
 
             </StackLayout>
         </StackLayout>

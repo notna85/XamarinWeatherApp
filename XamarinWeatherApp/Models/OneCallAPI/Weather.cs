@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace XamarinWeatherApp.Models
+namespace XamarinWeatherApp.Models.OneCallAPI
 {
-    public class Weather
+    class Weather
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -18,6 +18,8 @@ namespace XamarinWeatherApp.Models
 
         [JsonProperty("icon")]
         public string Icon { get; set; }
+
+        public string DisplayIcon { get; set; }
 
         public Weather()
         {
